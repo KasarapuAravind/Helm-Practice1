@@ -1,0 +1,21 @@
+app:
+  replicas: 4
+  env: prod
+  container:
+    image: nginx:latest
+  computerc:
+    limits:
+      cpu: 400m
+      memory: 400Mi
+    requests:
+      cpu: 400m
+      memory: 400Mi
+
+hpa:
+  enabled: true
+  maxReplicas: 10
+  minReplicas: 2
+  cpuuti: 50
+  
+
+      

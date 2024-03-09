@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-ui-dep
+  labels:
+  {{- include "nginx-ui.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.app.replicas }}
+  selector:
+    matchLabels:
+      app: nginx-ui
+  template:
+    metadata:
+      labels:
+        {{- include "nginx-ui.labels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: nginx-ui
+          image: {{ .Values.app.container.image | quote }}
+          imagePullPolicy: IfNotPresent
+          resources:
+            {{- toYaml .Values.app.computerc | nindent 12 }}
+            
